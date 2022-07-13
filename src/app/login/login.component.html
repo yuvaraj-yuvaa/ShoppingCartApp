@@ -1,0 +1,122 @@
+<div class="w3l_banner_nav_right">
+    <!-- login -->
+            <div class="w3_login">
+                <h3>Sign In & Sign Up</h3>
+                <div class="w3_login_module">
+                    <div class="module form-module">
+                      <div class="toggle"><i class="fa fa-times fa-pencil"></i>
+                        <div class="tooltip">Click Me</div>
+                      </div>
+                      <div class="form">
+                        <h2>Login to your account</h2>
+                        <p class="alert alert-danger" *ngIf="msg">
+                          {{msg}}
+                        </p>
+                        <!-- <button (click)="getUserData()">Get User Data</button> <br><br> -->
+                        <form [formGroup]="loginForm" (submit)="doLogin()">
+                          <input type="text" name="Username" formControlName="Username" placeholder="Username">
+                          <p class="alert alert-danger"
+                          *ngIf="userNameCtrl.touched && userNameCtrl.invalid">
+                            Please Enter Username
+                          </p>
+
+                          <p class="alert alert-danger" *ngIf="userNameCtrl.touched && userNameCtrl.errors?.['minlength']">
+                            Name should be minimum 2 chars
+                          </p>
+                          
+                          <p class="alert alert-danger" *ngIf="userNameCtrl.touched && userNameCtrl.errors?.['pattern']">
+                            Username should be letters and allows Hyphens only
+                          </p>
+  
+
+
+                          <input type="password" name="Password" formControlName="Password"  placeholder="Password">
+                          <p class="alert alert-danger"
+                          *ngIf="userPasswordCtrl.touched && userPasswordCtrl.errors?.['required']">
+                            Please Enter Password
+                          </p>
+                          <!-- <p class="alert alert-danger"
+                          *ngIf="userPasswordCtrl.touched && userPasswordCtrl.errors?.['minlength']">
+                            Please Enter Minimum 4 Characters
+                          </p> -->
+
+                          <p class="alert alert-danger" *ngIf="userPasswordCtrl.touched && userPasswordCtrl.errors?.['minlength']">
+                            Password should be minimum 8 chars
+                          </p>
+
+                          <p class="alert alert-danger" *ngIf="userPasswordCtrl.touched && userPasswordCtrl.errors?.['pattern']">
+                            Password Must Contains (Uppercase & Lowercase letters, Number and Special Char)
+                          </p>
+  
+
+                          <input type="submit" value="Login" [disabled]="loginForm.invalid">
+                        </form>
+                      </div>
+                      <div class="form">
+                        <h2>Create an account</h2>
+                        <p class="alert alert-success" *ngIf="msg">
+                          {{msg}}
+                        </p>
+                        <form (submit)="doRegistration(f)" #f="ngForm">
+                          <input type="text" name="Username" ngModel placeholder="Username"
+                          (blur)="usernameCheck(uname.value)" #uname="ngModel" required>
+
+                          <p class="alert alert-danger" *ngIf="(uname.touched || uname.dirty) && uname.errors?.['required']">
+                            Please Enter Uer Nmae
+                          </p>
+
+                          <!-- {{isUsernameAvail}}, {{uname.touched}} -->
+                          <p class="alert alert-danger" *ngIf="!isUsernameAvail && uname.dirty">
+                            Username Already Taken
+                          </p>
+
+                          <p class="alert alert-danger" *ngIf="uname.touched && uname.errors?.['minlength']">
+                            Pleae Enter Minimum 2 Character
+                          </p>
+
+                          <input type="password" name="Password" pattern="^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$" required minlength="8" #userPasword="ngModel" ngModel placeholder="Password" required>
+
+                          <p class="alert alert-danger" *ngIf="(userPasword.touched || userPasword.dirty) && userPasword.errors?.['required']">
+                            Please Enter Pasword
+                          </p>
+                          
+                          <p class="alert alert-danger" *ngIf="(userPasword.touched || userPasword.dirty) && userPasword.errors?.['pattern']">
+                          Password Must Contains (Uppercase & Lowercase letters, Number and Special Char)
+                          </p>
+
+                          <p class="alert alert-danger" *ngIf="userPasword.touched && userPasword.errors?.['minlength']">
+                          Password should be minmum 8 char
+                          </p>
+
+                          <input type="email" name="Email"  placeholder="Email Address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required ngModel #userEmail="ngModel">
+
+                          <p class="alert alert-danger" *ngIf="(userEmail.touched || userEmail.dirty) && userEmail.errors?.['required']">
+                            Please Enter Email
+                          </p>
+
+                          <p class="alert alert-danger" *ngIf="(userEmail.touched || userEmail.dirty) && userEmail.errors?.['pattern']">
+                            Email should be xxxx@yyy.zzz Format
+                          </p>
+  
+
+                          <input type="text" name="Phone" ngModel placeholder="Phone Number" required #userMobileNum="ngModel" ngModel pattern="^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$">
+
+                          <p class="alert alert-danger" *ngIf="(userMobileNum.touched || userMobileNum.dirty) && userMobileNum.errors?.['required']">
+                            Please Enter Phone Numer
+                          </p>
+  
+                          <p class="alert alert-danger" *ngIf="(userMobileNum.touched || userMobileNum.dirty) && userMobileNum.errors?.['pattern']">
+                            Mobile should be max 10 digits
+                          </p>
+
+
+                          <input type="submit" value="Register" [disabled]="!isUsernameAvail">
+                        </form>
+                      </div>
+                      <div class="cta"><a href="#">Forgot your password?</a></div>
+                    </div>
+                </div>
+            </div>
+    <!-- //login -->
+            </div>
+            <div class="clearfix"></div>
